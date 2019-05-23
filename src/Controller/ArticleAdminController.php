@@ -45,9 +45,12 @@ class ArticleAdminController extends AbstractController
 
         }
 
-        return $this->render('article_admin/new.html.twig', [
-            'articleForm' => $form->createView(),
-        ]);
+        return $this->render(
+            'article_admin/new.html.twig',
+            [
+                'articleForm' => $form->createView(),
+            ]
+        );
 
     }
 
@@ -59,10 +62,15 @@ class ArticleAdminController extends AbstractController
         Article $article,
         Request $request,
         EntityManagerInterface $em
-    )
-    {
+    ) {
 
-        $form = $this->createForm(ArticleFormType::class, $article);
+        $form = $this->createForm(
+            ArticleFormType::class,
+            $article,
+            [
+                'include_published_at' => true,
+            ]
+        );
 
         $form->handleRequest($request);
 
@@ -70,18 +78,26 @@ class ArticleAdminController extends AbstractController
             $em->persist($article);
             $em->flush();
 
-            $this->addFlash('success',
-                'Article Updated! Inaccuracies Squashed!');
+            $this->addFlash(
+                'success',
+                'Article Updated! Inaccuracies Squashed!'
+            );
 
-            return $this->redirectToRoute('admin_article_edit', [
-                'id' => $article->getId(),
-            ]);
+            return $this->redirectToRoute(
+                'admin_article_edit',
+                [
+                    'id' => $article->getId(),
+                ]
+            );
 
         }
 
-        return $this->render('article_admin/edit.html.twig', [
-            'articleForm' => $form->createView(),
-        ]);
+        return $this->render(
+            'article_admin/edit.html.twig',
+            [
+                'articleForm' => $form->createView(),
+            ]
+        );
 
     }
 
@@ -93,9 +109,12 @@ class ArticleAdminController extends AbstractController
 
         $articles = $articleRepository->findAll();
 
-        return $this->render('article_admin/list.html.twig', [
-            'articles' => $articles,
-        ]);
+        return $this->render(
+            'article_admin/list.html.twig',
+            [
+                'articles' => $articles,
+            ]
+        );
 
     }
 
