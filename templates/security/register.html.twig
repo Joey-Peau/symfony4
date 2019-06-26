@@ -27,7 +27,7 @@
 
 {%- endblock form_row -%}
 
-{% block _user_registration_form_agreedTerms_row %}
+{% block _user_registration_form_agreeTerms_row %}
 
 
     <div class="checkbox mb-3">
@@ -53,7 +53,7 @@
     {{ form_row(registrationForm.plainPassword, {
         attr: { placeholder: 'Password' }
     }) }}
-    {{ form_row(registrationForm.agreedTerms) }}
+    {{ form_row(registrationForm.agreeTerms) }}
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">
         Register

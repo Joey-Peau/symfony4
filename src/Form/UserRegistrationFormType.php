@@ -23,7 +23,7 @@ class UserRegistrationFormType extends AbstractType
                 PasswordType::class
             )
             ->add(
-                'agreedTerms',
+                'agreeTerms',
                 CheckboxType::class
             );
     }
