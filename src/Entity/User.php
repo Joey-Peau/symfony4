@@ -3,6 +3,8 @@
 
 namespace App\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -63,7 +65,7 @@ class User implements UserInterface
     private $apiTokens;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author",fetch="EXTRA_LAZY")
      */
     private $articles;
 
@@ -258,14 +260,14 @@ class User implements UserInterface
         return $this->getFirstName();
     }
 
-    public function getAgreedTermsAt(): ?\DateTimeInterface
+    public function getAgreedTermsAt(): ?DateTimeInterface
     {
         return $this->agreedTermsAt;
     }
 
     public function agreedTerms(): self
     {
-        $this->agreedTermsAt = new \DateTime();
+        $this->agreedTermsAt = new DateTime();
 
         return $this;
     }
